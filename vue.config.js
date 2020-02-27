@@ -10,7 +10,7 @@ module.exports = {
   productionSourceMap: false,
   // 配置es-link true,'error'
   lintOnSave: true,
-  css: {  // 一次配置，全局使用，这个scss 因为每个文件都要引入
+  css: { // 一次配置，全局使用，这个scss 因为每个文件都要引入
     loaderOptions: {
       sass: {
         prependData: `@import "./src/styles/main.scss";`
@@ -33,17 +33,24 @@ module.exports = {
         target: 'https://api.douban.com',
         ws: true,
         changeOrigin: true,
-        pathRewrite:{
+        pathRewrite: {
           '^/mgr': ''
         }
       }
     }
   },
-  configureWebpack:{  // 覆盖webpack默认配置的都在这里
-    resolve:{   // 配置解析别名
-      alias:{
-        '@': path.resolve(__dirname, './src')
-      } 
+  configureWebpack: (config)=>{
+    config.resolve = { // 覆盖webpack默认配置的都在这里
+        extensions: ['.js', '.json', '.vue'],
+        alias: {
+          '@': path.resolve(__dirname, './src'),
+          'public': path.resolve(__dirname, './public'),
+          '@c': path.resolve(__dirname, './src/components'),
+          'common': path.resolve(__dirname, './src/common'),
+          'api': path.resolve(__dirname, './src/api'),
+          'view': path.resolve(__dirname, './src/view'),
+          'data': path.resolve(__dirname, './src/data'),
+      }
     }
   }
 }
