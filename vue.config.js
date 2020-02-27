@@ -9,7 +9,7 @@ module.exports = {
   // 生产环境是否生成 sourceMap 文件
   productionSourceMap: false,
   // 配置es-link true,'error'
-  lintOnSave: true,
+  lintOnSave: false,
   css: { // 一次配置，全局使用，这个scss 因为每个文件都要引入
     loaderOptions: {
       sass: {
@@ -21,20 +21,20 @@ module.exports = {
   devServer: {
     // 可以通过设置让浏览器 overlay 同时显示警告和错误：
     overlay: {
-      warnings: false,
-      errors: false
+      warnings: true,
+      errors: true
     },
     open: false,
-    host: 'localhost',
+    host: '0.0.0.0',
     port: 8080,
     https: false,
+    hot:true,
     proxy: {
-      '/mgr': {
-        target: 'https://api.douban.com',
-        ws: true,
+      '/devApi': {
+        target: 'http://www.web-jshtml.cn/productapi',
         changeOrigin: true,
         pathRewrite: {
-          '^/mgr': ''
+          '^/devApi': ''
         }
       }
     }
